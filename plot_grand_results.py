@@ -68,7 +68,7 @@ def generate_multi_dataset_plot():
     ax.set_title('Generalization Across Biochemical Datasets (5-Fold Mean)')
     ax.set_xticks(x)
     ax.set_xticklabels(datasets)
-    ax.legend(loc='lower right', shadow=True)
+    ax.legend(loc='upper right', shadow=True)
     ax.grid(axis='y', linestyle='--', alpha=0.7)
 
     # Function to attach a text label above each bar
