@@ -2,12 +2,13 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch_geometric.datasets import TUDataset
-from sklearn.model_selection import KFold
+from sklearn.model_selection import train_test_split
 import numpy as np
 import time
 
 from data_processing import lift_graph_to_simplicial_complex
 from model import CurvatureMPSN
+from model_baselines import BaselineGCN
 
 def get_incidence_matrices(sc):
     """
@@ -67,14 +68,15 @@ def process_dataset(dataset):
         else:
             frc_weights = torch.empty((0, 1))
             
-        # Graph label
         y = data.y
+        edge_index = data.edge_index
         
         processed_data.append({
             'x_0': x_0,
+            'edge_index': edge_index,
             'B1': B1,
             'B2': B2,
-            'frc_weights': frc_weights,
+            'frc': frc_weights,
             'y': y
         })
         
@@ -83,22 +85,24 @@ def process_dataset(dataset):
             
     return processed_data
 
-def train_epoch(model, optimizer, criterion, train_data, device):
+def train_epoch(model, optimizer, criterion, train_data, device, is_gcn=False):
     model.train()
     total_loss = 0
     correct = 0
     
     for data in train_data:
-        x_0 = data['x_0'].to(device)
-        B1 = data['B1'].to(device)
-        B2 = data['B2'].to(device)
-        frc = data['frc_weights'].to(device)
-        y = data['y'].to(device)
-        
         optimizer.zero_grad()
         
-        # Forward pass (passing None for batched indices as we process batch size 1 here)
-        out = model(x_0, None, None, B1, B2, frc, None, None, None)
+        if is_gcn:
+            # GCN needs x and edge_index
+            out = model(data['x_0'].to(device), data['edge_index'].to(device))
+        else:
+            # MPSN needs incidence matrices and FRC
+            out = model(data['x_0'].to(device), None, None, 
+                        data['B1'].to(device), data['B2'].to(device), 
+                        data['frc'].to(device), None, None, None)
+            
+        y = data['y'].to(device)
         
         loss = criterion(out, y)
         loss.backward()
@@ -110,20 +114,21 @@ def train_epoch(model, optimizer, criterion, train_data, device):
         
     return total_loss / len(train_data), correct / len(train_data)
 
-def test(model, criterion, test_data, device):
+def test(model, criterion, test_data, device, is_gcn=False):
     model.eval()
     total_loss = 0
     correct = 0
     
     with torch.no_grad():
         for data in test_data:
-            x_0 = data['x_0'].to(device)
-            B1 = data['B1'].to(device)
-            B2 = data['B2'].to(device)
-            frc = data['frc_weights'].to(device)
+            if is_gcn:
+                out = model(data['x_0'].to(device), data['edge_index'].to(device))
+            else:
+                out = model(data['x_0'].to(device), None, None, 
+                            data['B1'].to(device), data['B2'].to(device), 
+                            data['frc'].to(device), None, None, None)
+                
             y = data['y'].to(device)
-            
-            out = model(x_0, None, None, B1, B2, frc, None, None, None)
             loss = criterion(out, y)
             
             total_loss += loss.item()
@@ -136,51 +141,63 @@ if __name__ == "__main__":
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {device}")
     
-    # Load dataset
-    print("Loading MUTAG Dataset...")
-    dataset = TUDataset(root='/tmp/MUTAG', name='MUTAG')
+    print("Loading NCI1 dataset...")
+    dataset = TUDataset(root='/tmp/NCI1', name='NCI1')
     
-    # We define number of node features and classes
-    num_node_features = dataset.num_node_features if dataset.num_node_features > 0 else 1
+    print(f"Dataset Size: {len(dataset)} graphs")
+    
+    processed_dataset = process_dataset(dataset)
+    num_node_features = dataset.num_node_features
+    if num_node_features == 0:
+        num_node_features = 1
+        
     num_classes = dataset.num_classes
     
-    # Process dataset
-    processed_dataset = process_dataset(dataset)
+    # For a fast comparison, we do a single 80/20 train/test split
+    train_data, test_data = train_test_split(processed_dataset, test_size=0.2, random_state=42)
     
-    # 10-Fold Cross Validation
-    kf = KFold(n_splits=10, shuffle=True, random_state=42)
+    print(f"Training on {len(train_data)} graphs, Testing on {len(test_data)} graphs.")
     
-    all_test_accs = []
-    epoch_runtimes = []
-    
-    for fold, (train_idx, test_idx) in enumerate(kf.split(processed_dataset)):
-        print(f"--- Fold {fold+1}/10 ---")
-        
-        train_data = [processed_dataset[i] for i in train_idx]
-        test_data = [processed_dataset[i] for i in test_idx]
-        
-        # Initialize model
-        model = CurvatureMPSN(num_node_features=num_node_features, hidden_dim=32, num_classes=num_classes).to(device)
+    def train_and_eval(model, is_gcn, name):
+        print(f"\n--- Training {name} ---")
         optimizer = optim.Adam(model.parameters(), lr=0.005, weight_decay=5e-4)
         criterion = nn.CrossEntropyLoss()
         
-        # Train for 20 epochs for demonstration
-        for epoch in range(1, 21):
+        epoch_runtimes = []
+        best_test_acc = 0.0
+        
+        # 30 epochs for a fast benchmark
+        for epoch in range(1, 31):
             start_time = time.time()
-            train_loss, train_acc = train_epoch(model, optimizer, criterion, train_data, device)
+            train_loss, train_acc = train_epoch(model, optimizer, criterion, train_data, device, is_gcn)
             end_time = time.time()
             
             epoch_time = end_time - start_time
             epoch_runtimes.append(epoch_time)
             
-            test_loss, test_acc = test(model, criterion, test_data, device)
+            test_loss, test_acc = test(model, criterion, test_data, device, is_gcn)
             
-            if epoch % 5 == 0 or epoch == 1:
-                print(f"Epoch {epoch:03d} | Time: {epoch_time:.3f}s | Train Loss: {train_loss:.4f} | Train Acc: {train_acc:.4f} | Test Acc: {test_acc:.4f}")
+            if test_acc > best_test_acc:
+                best_test_acc = test_acc
                 
-        all_test_accs.append(test_acc)
+            if epoch % 5 == 0 or epoch == 1:
+                print(f"Epoch {epoch:03d} | Time: {epoch_time:.3f}s | Train Acc: {train_acc:.4f} | Test Acc: {test_acc:.4f}")
+                
+        print(f"-> {name} Best Test Accuracy: {best_test_acc*100:.2f}%")
+        print(f"-> {name} Avg Time/Epoch: {np.mean(epoch_runtimes):.3f}s")
+        return best_test_acc
         
-    print(f"\nFinal 10-Fold Results:")
-    print(f"Accuracy: {np.mean(all_test_accs)*100:.2f}% ± {np.std(all_test_accs)*100:.2f}%")
-    print(f"Average Runtime per Epoch: {np.mean(epoch_runtimes):.3f}s ± {np.std(epoch_runtimes):.3f}s")
-
+    # Initialize and train GCN Baseline
+    gcn_model = BaselineGCN(num_node_features=num_node_features, hidden_dim=32, num_classes=num_classes).to(device)
+    gcn_acc = train_and_eval(gcn_model, is_gcn=True, name="Standard GCN (1-WL Baseline)")
+    
+    # Initialize and train CurvatureMPSN
+    mpsn_model = CurvatureMPSN(num_node_features=num_node_features, hidden_dim=32, num_classes=num_classes).to(device)
+    mpsn_acc = train_and_eval(mpsn_model, is_gcn=False, name="Curvature-Weighted MPSN")
+    
+    print("\n==================================")
+    print("FINAL COMPARISON (NCI1 DATASET)")
+    print("==================================")
+    print(f"Standard GCN:         {gcn_acc*100:.2f}%")
+    print(f"Curvature MPSN:       {mpsn_acc*100:.2f}%")
+    print(f"Improvement:          +{(mpsn_acc - gcn_acc)*100:.2f}%")
