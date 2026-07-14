@@ -1,0 +1,147 @@
+{
+    "Statistical_Significance_Summary": "Mean \u00b1 Std Dev across 5 distinct random seeds.",
+    "GINBaseline": {
+        "Accuracy": {
+            "Mean": 73.28467153284672,
+            "Std_Dev": 0.7640057648714165
+        },
+        "F1_Macro": {
+            "Mean": 0.7317592379914686,
+            "Std_Dev": 0.007259993489204579
+        },
+        "Average_Runtime_Per_Epoch_Sec": {
+            "Mean": 0.2683658528327942,
+            "Std_Dev": 0.01814921789496846
+        },
+        "Confusion_Matrix_Averaged": {
+            "True_Positives (TP)": 288.2,
+            "True_Negatives (TN)": 314.2,
+            "False_Positives (FP)": 91.6,
+            "False_Negatives (FN)": 128.0
+        },
+        "Confusion_Matrices_Raw": [
+            [
+                [
+                    301,
+                    140
+                ],
+                [
+                    89,
+                    292
+                ]
+            ],
+            [
+                [
+                    307,
+                    75
+                ],
+                [
+                    149,
+                    291
+                ]
+            ],
+            [
+                [
+                    317,
+                    77
+                ],
+                [
+                    134,
+                    294
+                ]
+            ],
+            [
+                [
+                    288,
+                    109
+                ],
+                [
+                    109,
+                    316
+                ]
+            ],
+            [
+                [
+                    358,
+                    57
+                ],
+                [
+                    159,
+                    248
+                ]
+            ]
+        ]
+    },
+    "DynamicCWNetwork": {
+        "Accuracy": {
+            "Mean": 76.44768856447688,
+            "Std_Dev": 1.5245207005178165
+        },
+        "F1_Macro": {
+            "Mean": 0.7632866039761892,
+            "Std_Dev": 0.015821835633641958
+        },
+        "Average_Runtime_Per_Epoch_Sec": {
+            "Mean": 0.3211650364398956,
+            "Std_Dev": 0.032165010248709026
+        },
+        "Confusion_Matrix_Averaged": {
+            "True_Positives (TP)": 334.8,
+            "True_Negatives (TN)": 293.6,
+            "False_Positives (FP)": 112.2,
+            "False_Negatives (FN)": 81.4
+        },
+        "Confusion_Matrices_Raw": [
+            [
+                [
+                    336,
+                    105
+                ],
+                [
+                    66,
+                    315
+                ]
+            ],
+            [
+                [
+                    266,
+                    116
+                ],
+                [
+                    84,
+                    356
+                ]
+            ],
+            [
+                [
+                    286,
+                    108
+                ],
+                [
+                    100,
+                    328
+                ]
+            ],
+            [
+                [
+                    274,
+                    123
+                ],
+                [
+                    75,
+                    350
+                ]
+            ],
+            [
+                [
+                    306,
+                    109
+                ],
+                [
+                    82,
+                    325
+                ]
+            ]
+        ]
+    }
+}
