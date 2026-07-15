@@ -10,10 +10,11 @@ class CurvatureWeightedSimplicialConv(nn.Module):
     
     This layer specifically operates on 1-cells (edges) of a Simplicial Complex.
     """
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, in_channels, out_channels, gating='curvature'):
         super(CurvatureWeightedSimplicialConv, self).__init__()
         self.in_channels = in_channels
         self.out_channels = out_channels
+        self.gating = gating
         
         # Linear transformations for the different message passing channels
         # Downward message passing (from triangles to edges)
@@ -25,6 +26,11 @@ class CurvatureWeightedSimplicialConv(nn.Module):
         # Adjacency message passing (Hodge Laplacian)
         self.lin_adj = nn.Linear(in_channels, out_channels)
         
+        if self.gating == 'scalar':
+            self.scalar_gate = nn.Linear(in_channels, 1)
+        elif self.gating == 'vector':
+            self.vector_gate = nn.Linear(in_channels, out_channels)
+            
     def forward(self, x_0, x_1, x_2, incidence_1, incidence_2, frc_weights):
         """
         Forward pass for the curvature-weighted convolutional layer.
@@ -67,15 +73,17 @@ class CurvatureWeightedSimplicialConv(nn.Module):
         # Aggregate messages
         out = x_1_t + msg_up + msg_down + msg_adj_down + msg_adj_up
         
-        # Apply the Curvature Weighting
-        # frc_weights is a tensor of size (N_edges, 1)
-        # We apply a non-linearity (like Sigmoid or ELU) to the curvature 
-        # to act as an attention mechanism / gate
-        curvature_gate = torch.sigmoid(frc_weights)
-        
-        # Modulate the aggregated features by the curvature gate
-        out = out * curvature_gate
-        
+        # Apply Gating
+        if self.gating == 'curvature':
+            gate = torch.sigmoid(frc_weights)
+            out = out * gate
+        elif self.gating == 'scalar':
+            gate = torch.sigmoid(self.scalar_gate(x_1))
+            out = out * gate
+        elif self.gating == 'vector':
+            gate = torch.sigmoid(self.vector_gate(x_1))
+            out = out * gate
+            
         return F.elu(out)
 
 
@@ -85,7 +93,7 @@ class CurvatureMPSN(nn.Module):
     
     A full architecture containing topological layers and a global readout.
     """
-    def __init__(self, num_node_features, hidden_dim, num_classes):
+    def __init__(self, num_node_features, hidden_dim, num_classes, gating='curvature'):
         super(CurvatureMPSN, self).__init__()
         
         # Initial embeddings
@@ -95,8 +103,8 @@ class CurvatureMPSN(nn.Module):
         self.triangle_embedding = nn.Linear(1, hidden_dim)
         
         # Convolutional layers
-        self.conv1 = CurvatureWeightedSimplicialConv(hidden_dim, hidden_dim)
-        self.conv2 = CurvatureWeightedSimplicialConv(hidden_dim, hidden_dim)
+        self.conv1 = CurvatureWeightedSimplicialConv(hidden_dim, hidden_dim, gating=gating)
+        self.conv2 = CurvatureWeightedSimplicialConv(hidden_dim, hidden_dim, gating=gating)
         
         # Final classification readout
         self.classifier = nn.Sequential(

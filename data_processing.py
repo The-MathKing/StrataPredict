@@ -20,7 +20,7 @@ def compute_forman_ricci_curvature(G, edge):
     frc = 4 - deg_v1 - deg_v2 + 3 * num_triangles
     return frc
 
-def lift_graph_to_simplicial_complex(pyg_data):
+def lift_graph_to_simplicial_complex(pyg_data, max_dim=2):
     """
     Lifts a PyTorch Geometric Data object (graph) to a TopoNetX SimplicialComplex.
     Also computes Forman-Ricci Curvature for all 1-simplices (edges) and adds it as a feature.
@@ -29,7 +29,7 @@ def lift_graph_to_simplicial_complex(pyg_data):
     G = to_networkx(pyg_data, to_undirected=True)
     
     # Initialize a Simplicial Complex
-    # We build a clique complex up to dimension 2 (triangles)
+    # We build a clique complex up to dimension 2 (triangles) or 3 (tetrahedrons)
     SC = tnx.SimplicialComplex()
     
     # Add 0-simplices (nodes)
@@ -45,14 +45,18 @@ def lift_graph_to_simplicial_complex(pyg_data):
         frc = compute_forman_ricci_curvature(G, edge)
         SC.add_simplex(edge, frc=frc)
         
-    # Add 2-simplices (triangles / 3-cliques)
-    cliques = nx.find_cliques(G)
+    # Add higher order simplices (2-simplices and 3-simplices)
+    import itertools
+    cliques = list(nx.find_cliques(G))
     for clique in cliques:
-        if len(clique) >= 3:
+        if len(clique) >= 3 and max_dim >= 2:
             # We add all combinations of 3 nodes as 2-simplices
-            import itertools
             for triangle in itertools.combinations(clique, 3):
                 SC.add_simplex(triangle)
+        if len(clique) >= 4 and max_dim >= 3:
+            # We add all combinations of 4 nodes as 3-simplices
+            for tetrahedron in itertools.combinations(clique, 4):
+                SC.add_simplex(tetrahedron)
                 
     return SC, G
 
