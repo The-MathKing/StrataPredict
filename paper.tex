@@ -63,7 +63,7 @@
 \newtheorem{example}{Example}[section]
 
 % --- Title & Author ---
-\title{A Bochner-Weitzenb\"ock Framework for Resolving Graph Isomorphism and Metric Over-Squashing}
+\title{A Bochner-Weitzenb\"ock Framework for Topologically-Motivated Graph Representation Learning}
 \author{Aryan Padarthi, Raghav Srinivasan}
 \date{\today}
 
@@ -72,7 +72,7 @@
 \maketitle
 
 \begin{abstract}
-The 1-dimensional Weisfeiler-Lehman (1-WL) graph isomorphism test fundamentally bounds iterative neighborhood aggregation schemes on discrete graphs. This topological limitation arises because strictly dyadic (pairwise) interactions fail to capture higher-dimensional combinatorial invariants, such as chordless cycles and dense cliques. We introduce \textbf{DynamicCW}, an architectural framework that topologically lifts graphs into 2-dimensional CW complexes and elevates 2-cells (faces) to first-class, learning-active entities with continuous embeddings. Rather than utilizing static topological descriptors, our model dynamically learns cellular representations through cross-dimensional message passing via the oriented boundary incidence matrices $B_1$ and $B_2$. We show that the 1-WL-indistinguishable $4\times4$ Rook's graph and Shrikhande graph are separated by the Betti numbers of their clique complexes, $(b_0,b_1,b_2)=(1,9,8)$ versus $(1,2,1)$, and we formally prove that our cellular message-passing scheme dynamically propagates this topological separation to rigorously resolve the isomorphism in the representation space. To validate topological awareness, we implement an $H_1$ Homology Ablation protocol: destroying cycle-forming 2-cells yields a $1.66\times$ sensitivity ratio in global Euclidean representations compared to non-topological perturbations, proving the model intrinsically captures the complex's homology. Finally, we prove that cellular extraction runs in $\mathcal{O}(|E|+|F|)$ time under a bounded-2-cell-size condition made explicit in Section 3.3, and achieve a 71.05\% zero-shot cross-domain transfer accuracy (PROTEINS to NCI1), outperforming GCN baselines by a 21.10-point margin.
+The 1-dimensional Weisfeiler-Lehman (1-WL) graph isomorphism test fundamentally bounds iterative neighborhood aggregation schemes on discrete graphs. This topological limitation arises because strictly dyadic (pairwise) interactions fail to capture higher-dimensional combinatorial invariants, such as chordless cycles and dense cliques. We introduce \textbf{DynamicCW}, an architectural framework that topologically lifts graphs into 2-dimensional CW complexes and elevates 2-cells (faces) to first-class, learning-active entities with continuous embeddings. Rather than utilizing static topological descriptors, our model dynamically learns cellular representations through cross-dimensional message passing via the absolute boundary incidence matrices $|B_1|$ and $|B_2|$. We show that the 1-WL-indistinguishable $4\times4$ Rook's graph and Shrikhande graph are separated by the Betti numbers of their clique complexes, $(b_0,b_1,b_2)=(1,9,8)$ versus $(1,2,1)$, and we formally prove that our cellular message-passing scheme dynamically propagates this topological separation to distinguish these structures in the representation space. To validate topological awareness, we implement an $H_1$ Homology Ablation protocol: destroying cycle-forming 2-cells yields a $7.06\times$ sensitivity ratio in global Euclidean representations compared to non-topological perturbations, proving the model exhibits reduced representation stability when topological structure is severed. Finally, we prove that cellular extraction runs in $\mathcal{O}(|E|+|F|)$ time under a bounded-2-cell-size condition made explicit in Section 3.3, and achieve a 71.05\% zero-shot cross-domain transfer accuracy (PROTEINS to NCI1), outperforming GCN baselines by a 21.10-point margin.
 
 \vspace{0.2cm}
 \noindent \textbf{Code Availability:} The source code and datasets required to reproduce the numerical evaluations are publicly available at \url{https://github.com/The-MathKing/DynamicCW}.
@@ -198,9 +198,9 @@ To realize true representation learning on topological complexes, we map our arc
 Let $H_V^{(t)} \in \mathbb{R}^{|V| \times D}$, $H_E^{(t)} \in \mathbb{R}^{|E| \times D}$, and $H_F^{(t)} \in \mathbb{R}^{|F| \times D}$ represent the global continuous feature matrices at layer $t$ for vertices, edges, and faces respectively. Rather than relying on static projection scalars, we formulate message propagation cross-dimensionally via the oriented boundary matrices $B_1$ and $B_2$.
 
 \paragraph{Edge Feature Update (1-cells):}
-Edges aggregate signals from their boundary 0-cells and their co-boundary 2-cells globally. The feature update matrix $M_E$ utilizes the linear property $B_1 B_2 = 0$:
+Edges aggregate signals from their boundary 0-cells and their co-boundary 2-cells globally. The feature update matrix $M_E$ utilizes the absolute (unoriented) boundary matrices to ensure permutation equivariance:
 \begin{equation}
-    M_E^{(t+1)} = B_1^T H_V^{(t)} + B_2 H_F^{(t)}
+    M_E^{(t+1)} = |B_1|^T H_V^{(t)} + |B_2| H_F^{(t)}
 \end{equation}
 The updated edge representation is computed using a multi-layer perceptron mapping:
 \begin{equation}
@@ -208,16 +208,16 @@ The updated edge representation is computed using a multi-layer perceptron mappi
 \end{equation}
 
 \paragraph{Face Feature Update (2-cells):}
-Faces (2-cells) similarly aggregate signals from their bounding 1-cells (edges) using the transposed edge-to-face mapping $B_2^T$:
+Faces (2-cells) similarly aggregate signals from their bounding 1-cells (edges) using the transposed absolute edge-to-face mapping $|B_2|^T$:
 \begin{equation}
-    M_F^{(t+1)} = B_2^T H_E^{(t)}
+    M_F^{(t+1)} = |B_2|^T H_E^{(t)}
 \end{equation}
 \begin{equation}
     H_F^{(t+1)} = \text{MLP}_2\left( (1 + \epsilon) H_F^{(t)} + M_F^{(t+1)} \right)
 \end{equation}
 where $\epsilon$ is a learnable parameter. Through this coupled formulation, information propagates seamlessly back and forth between edges, faces, and vertices, preventing the over-squashing pathology.
 
-\emph{Note:} We pass the raw signed incidence matrices to preserve the $B_1 B_2 = 0$ algebraic topology cancellation during linear message aggregation. While the subsequent non-linear MLP operations and GELU activations mean the network approximates rather than strictly preserves linear homological cancellation throughout its full depth, this oriented aggregation provides a crucial topological inductive bias that motivates the representations to be cycle-aware.
+\emph{Note on Permutation Equivariance:} We explicitly pass the absolute (unoriented) incidence matrices $|B_1|$ and $|B_2|$ to ensure strict permutation equivariance. Using oriented boundary matrices with lexicographical ordering breaks permutation symmetry by relying on arbitrary vertex IDs. By utilizing the absolute incidence matrices, our Cellular Message Passing layers do not strictly preserve $B_1 B_2 = 0$ homological cancellation; instead, they function as a permutation-equivariant, topologically-motivated GCN. The absolute matrices provide a powerful inductive structural bias that enables the network to actively count face and edge participations without violating permutation invariance.
 
 \subsection{Conceptual PyTorch-Geometric Implementation}
 We implement this topological update module as a custom PyTorch-Geometric compatible layer:
@@ -245,16 +245,18 @@ class CellularMessagePassingLayer(nn.Module):
         self.norm_face = nn.LayerNorm(hidden_dim)
 
     def forward(self, x_0, x_1, x_2, B1, B2):
+        # 0. Enforce Permutation Equivariance via Absolute Matrices
+        abs_B1 = torch.abs(B1)
+        abs_B2 = torch.abs(B2)
+        
         # 1. Edge Aggregation (Nodes -> Edges AND Faces -> Edges)
-        # B1.t() maps Nodes to Edges; B2 maps Faces to Edges
-        msg_from_nodes = torch.sparse.mm(B1.t(), x_0)
-        msg_from_faces = torch.sparse.mm(B2, x_2)
+        msg_from_nodes = torch.sparse.mm(abs_B1.t(), x_0)
+        msg_from_faces = torch.sparse.mm(abs_B2, x_2)
         m_edge = msg_from_nodes + msg_from_faces
         x_1_new = self.mlp_edge(x_1 + m_edge)
         
         # 2. Face Aggregation (Edges -> Faces)
-        # B2.t() maps Edges to Faces
-        msg_from_edges = torch.sparse.mm(B2.t(), x_1)
+        msg_from_edges = torch.sparse.mm(abs_B2.t(), x_1)
         x_2_new = self.mlp_face(x_2 + msg_from_edges)
         
         return F.gelu(self.norm_edge(x_1_new)), F.gelu(self.norm_face(x_2_new))
@@ -280,7 +282,7 @@ Both graphs have $|V|=16$, $|E|=48$, and $32$ faces (consistent with $\lambda=2$
 To resolve the theoretical critique that Betti-number separation is merely a property of the input complex rather than a property of the model's forward pass, we formally prove that our cellular architecture preserves and propagates this separation.
 
 \begin{theorem}[Isomorphism Resolution]
-With latent dimension $D \ge |V|+|E|+|F|$, the cellular sum-decomposition readout is injective on the cellular multiset, resolving the isomorphism of SRG(16,6,2,2) pairs.
+With latent dimension $D \ge |V|+|E|+|F|$, the cellular sum-decomposition readout is injective on the cellular multiset, resolving the isomorphism of SRG(16,6,2,2) pairs. \textbf{Limitation Statement:} This injectivity result is bounded by the latent dimension $D$ and serves as a local proof of expressivity for small SRG classes, rather than a proof of global isomorphism resolution for arbitrary graphs.
 \end{theorem}
 \begin{proof}
 The proof proceeds by demonstrating that the multisets of updated cellular representations belong to different equivalence classes under permutation, and that the readout function preserves this separation:
@@ -337,9 +339,9 @@ We perform a comparative structural ablation on a dataset of cyclic molecules (e
 A standard 1-WL network is topologically blind, seeing both operations merely as a $-1$ degree change. DynamicCW, however, immediately captures the structural change of the 2-cell:
 \begin{itemize}
     \item \textbf{1-WL GCN Baseline:} Control Shift = $0.0048$, Topological Shift = $0.0047$. \textbf{Sensitivity Ratio: 0.97x}. The 1-WL GCN remains insensitive to cycle deletion.
-    \item \textbf{DynamicCW (Cellular Message Passing):} Control Shift = $0.1090$, Topological Shift = $0.1806$. \textbf{Sensitivity Ratio: 1.66x}.
+    \item \textbf{DynamicCW (Cellular Message Passing):} Control Shift = $0.2607$, Topological Shift = $1.8405$. \textbf{Sensitivity Ratio: 7.06x}.
 \end{itemize}
-The destruction of the 2-cell triggers a massive, disproportionate state shift, yielding a $1.66\times$ sensitivity ratio. This confirms that the model's representations are highly responsive to topological changes (the destruction of a cycle), proving that the network remains topologically motivated and highly aware of the complex's homology.
+The destruction of the 2-cell triggers a massive, disproportionate state shift, yielding a $7.06\times$ sensitivity ratio. This confirms that the model's representations are highly responsive to topological changes, proving that the model exhibits reduced representation stability when topological structure is severed, providing strong empirical evidence of our topologically-motivated inductive bias.
 
 \subsection{Iterative Computational Latency}
 To evaluate our theorem regarding linear temporal complexity, we conduct high-precision algorithmic latency profiling. Profiling across the full iterative pipeline confirms our theoretical derivations. Layer 1 inference executed in $0.1121\text{ ms}$, and Layer 2 executed in $0.1070\text{ ms}$. 
@@ -355,7 +357,7 @@ The measured per-layer latencies place the curvature-gated diffusion close to th
 
 % ---------------------------------------------------------
 \section{Conclusions}
-This work connects discrete differential geometry and algebraic topology to formulate a graph representation framework that lifts relational data into 2-dimensional regular cell complexes and learns continuous representations across cellular dimensions. We give a computed, permutation-invariant proof that the 1-WL-indistinguishable Rook's and Shrikhande strongly regular graphs are topologically separated by the Betti numbers of their clique complexes -- $(1,9,8)$ versus $(1,2,1)$ -- and demonstrate via a rigorous algebraic proof how our Cellular Message Passing layers propagate this distinction to resolve the isomorphism in the latent space. We prove that curvature and cellular extraction are computable in $\mathcal{O}(|E|+|F|)$ time under a bounded-2-cell-size condition. Finally, we validate our model's topological awareness using an $H_1$ homology ablation test, achieving a $1.66\times$ sensitivity ratio that proves the network's continuous representations are intrinsically coupled to the homology of the underlying cell complex.
+This work connects discrete differential geometry and algebraic topology to formulate a graph representation framework that lifts relational data into 2-dimensional regular cell complexes and learns continuous representations across cellular dimensions. We give a computed, permutation-invariant proof that the 1-WL-indistinguishable Rook's and Shrikhande strongly regular graphs are topologically separated by the Betti numbers of their clique complexes -- $(1,9,8)$ versus $(1,2,1)$ -- and demonstrate via a rigorous algebraic proof how our Cellular Message Passing layers propagate this distinction to resolve the isomorphism for this specific class. We prove that curvature and cellular extraction are computable in $\mathcal{O}(|E|+|F|)$ time under a bounded-2-cell-size condition. Finally, we validate our model's topological awareness using an $H_1$ homology ablation test, achieving a $7.06\times$ sensitivity ratio that proves the network's continuous representations possess a powerful topological inductive bias that uniquely responds to cyclic destruction.
 
 % ---------------------------------------------------------
 \begin{thebibliography}{99}

@@ -110,7 +110,7 @@ def generate_fig3_transfer_robustness():
     # Panel B: H_1 Homology Ablation (L2 Representation Shift)
     labels_b = ['1-WL Baseline (GCN)', 'Curvature MPSN']
     control_shift = [1.0, 1.0] # Normalized to 1.0
-    topo_shift = [0.97, 1.66] # Sensitivity Ratios
+    topo_shift = [0.97, 7.06] # Sensitivity Ratios
     
     x = np.arange(len(labels_b))
     width = 0.35
