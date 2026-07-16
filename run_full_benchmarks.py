@@ -4,6 +4,8 @@ This script is the main entry point used for testing. It runs the full
 N=10 cross-validation suite for Manifold Diversity, Adversarial Robustness, 
 Ablation Studies, and Scalability Profiling, outputting to a JSON file.
 """
+import warnings
+warnings.filterwarnings("ignore")
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -19,7 +21,7 @@ import sys
 from train import process_dataset, train_epoch, test, get_incidence_matrices
 from model import CurvatureMPSN
 from model_baselines import BaselineGCN
-from adversarial_utils import inject_edge_noise
+from adversarial_utils import inject_edge_noise, targeted_bottleneck_attack
 from data_processing import lift_graph_to_simplicial_complex
 
 def set_seed(seed):
@@ -123,6 +125,27 @@ def main():
         final_results['robustness'][f'p_{p}'] = metrics
         print(f"  p={p}: GCN={metrics['gcn_mean']:.4f}, MPSN={metrics['mpsn_mean']:.4f}, p={metrics['p_value']:.4e}")
         
+    print("\n  [Targeted Bottleneck Attack]")
+    for p in [0.05, 0.1]:
+        print(f" Processing Targeted Drop p={p}...")
+        perturbed = []
+        for data in dataset:
+            try:
+                new_data = targeted_bottleneck_attack(data, drop_percent=p)
+                perturbed.append(new_data)
+            except Exception:
+                pass
+        
+        proc_data = process_dataset(perturbed)
+        train_data, test_data = train_test_split(proc_data, test_size=0.2, random_state=42)
+        
+        gcn_fn = lambda: BaselineGCN(num_node_features, 32, num_classes)
+        mpsn_fn = lambda: CurvatureMPSN(num_node_features, 32, num_classes)
+        
+        metrics = compare_models(gcn_fn, mpsn_fn, train_data, test_data, device, n_trials=10, epochs=10)
+        final_results['robustness'][f'targeted_p_{p}'] = metrics
+        print(f"  Targeted p={p}: GCN={metrics['gcn_mean']:.4f}, MPSN={metrics['mpsn_mean']:.4f}, p={metrics['p_value']:.4e}")
+        
     # 3. Ablation Study
     print("\n--- 3. Ablation Study ---")
     final_results['ablation'] = {}
@@ -190,6 +213,35 @@ def main():
         print(f"  Time: {t1-t0:.2f}s, Peak Mem: {peak/10**6:.2f}MB")
     except Exception as e:
         print(f"Scalability failed: {e}")
+        
+    # 5. Transferability Benchmark (Zero-Shot)
+    print("\n--- 5. Transferability Benchmark (Zero-Shot) ---")
+    final_results['transferability'] = {}
+    try:
+        print("Loading PROTEINS and NCI1 datasets...")
+        proteins_dataset = TUDataset(root='/tmp/PROTEINS', name='PROTEINS')
+        nci1_dataset = TUDataset(root='/tmp/NCI1', name='NCI1')
+        
+        num_classes = 2 # Both are binary classification
+        num_node_features = 1 # Using ignore_node_features=True
+        
+        print("Processing PROTEINS (Source)...")
+        source_data = process_dataset(proteins_dataset, ignore_node_features=True)
+        print("Processing NCI1 (Target)...")
+        target_data = process_dataset(nci1_dataset, ignore_node_features=True)
+        
+        train_source, _ = train_test_split(source_data, test_size=0.2, random_state=42)
+        test_target = target_data
+        
+        gcn_fn = lambda: BaselineGCN(num_node_features, 32, num_classes)
+        mpsn_fn = lambda: CurvatureMPSN(num_node_features, 32, num_classes)
+        
+        print("  Evaluating Zero-Shot Transfer...")
+        metrics = compare_models(gcn_fn, mpsn_fn, train_source, test_target, device, n_trials=10, epochs=10)
+        final_results['transferability']['PROTEINS_to_NCI1'] = metrics
+        print(f"  Zero-Shot Transfer: GCN={metrics['gcn_mean']:.4f}, MPSN={metrics['mpsn_mean']:.4f}, p={metrics['p_value']:.4e}")
+    except Exception as e:
+        print(f"Transferability failed: {e}")
         
     with open('results_full_run.json', 'w') as f:
         json.dump(final_results, f, indent=4)

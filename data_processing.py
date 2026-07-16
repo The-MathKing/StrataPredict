@@ -52,17 +52,28 @@ def lift_graph_to_simplicial_complex(pyg_data, max_dim=2):
         SC.add_simplex(edge, frc=frc)
         
     # Add higher order simplices (2-simplices and 3-simplices)
-    import itertools
-    cliques = list(nx.find_cliques(G))
-    for clique in cliques:
-        if len(clique) >= 3 and max_dim >= 2:
-            # We add all combinations of 3 nodes as 2-simplices
-            for triangle in itertools.combinations(clique, 3):
-                SC.add_simplex(triangle)
-        if len(clique) >= 4 and max_dim >= 3:
-            # We add all combinations of 4 nodes as 3-simplices
-            for tetrahedron in itertools.combinations(clique, 4):
-                SC.add_simplex(tetrahedron)
+    if max_dim >= 2:
+        triangles = set()
+        neighbors = {n: set(G.neighbors(n)) for n in G.nodes()}
+        for u, v in G.edges():
+            common = neighbors[u].intersection(neighbors[v])
+            for w in common:
+                triangles.add(tuple(sorted((u, v, w))))
+        
+        # Limit to max 5000 triangles to prevent memory blowup in dense graphs
+        triangles_list = list(triangles)[:5000]
+        for tri in triangles_list:
+            SC.add_simplex(tri)
+            
+        if max_dim >= 3:
+            tetrahedrons = set()
+            for tri in triangles_list:
+                u, v, w = tri
+                common = neighbors[u].intersection(neighbors[v]).intersection(neighbors[w])
+                for z in common:
+                    tetrahedrons.add(tuple(sorted((u, v, w, z))))
+            for t in list(tetrahedrons)[:1000]:
+                SC.add_simplex(t)
                 
     return SC, G
 

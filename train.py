@@ -7,10 +7,13 @@ and testing loops for Graph Neural Networks.
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import warnings
+warnings.filterwarnings("ignore")
 from torch_geometric.datasets import TUDataset
 from sklearn.model_selection import train_test_split
 import numpy as np
 import time
+import multiprocessing
 
 from data_processing import lift_graph_to_simplicial_complex
 from model import CurvatureMPSN
@@ -29,7 +32,7 @@ def get_incidence_matrices(sc):
         indices = torch.tensor(np.vstack((coo.row, coo.col)), dtype=torch.long)
         values = torch.tensor(coo.data, dtype=torch.float32)
         shape = coo.shape
-        B1 = torch.sparse_coo_tensor(indices, values, size=shape)
+        B1 = torch.sparse_coo_tensor(indices, values, size=shape).coalesce()
     else:
         B1 = torch.zeros((len(sc.skeleton(0)), 0))
         
@@ -39,55 +42,57 @@ def get_incidence_matrices(sc):
         indices = torch.tensor(np.vstack((coo.row, coo.col)), dtype=torch.long)
         values = torch.tensor(coo.data, dtype=torch.float32)
         shape = coo.shape
-        B2 = torch.sparse_coo_tensor(indices, values, size=shape)
+        B2 = torch.sparse_coo_tensor(indices, values, size=shape).coalesce()
     else:
         B2 = torch.zeros((len(sc.skeleton(1)), 0))
         
     return B1, B2
 
-def process_dataset(dataset):
+def _process_single_graph(args):
+    data, ignore_node_features = args
+    sc, _ = lift_graph_to_simplicial_complex(data)
+    
+    B1, B2 = get_incidence_matrices(sc)
+    
+    if hasattr(data, 'x') and data.x is not None and not ignore_node_features:
+        x_0 = data.x
+    else:
+        x_0 = torch.ones((len(sc.skeleton(0)), 1))
+        
+    if sc.dim >= 1:
+        frc_dict = sc.get_simplex_attributes('frc')
+        frc_list = [frc_dict[tuple(edge)] for edge in sc.skeleton(1)]
+        frc_weights = torch.tensor(frc_list, dtype=torch.float32).unsqueeze(1)
+    else:
+        frc_weights = torch.empty((0, 1))
+        
+    return {
+        'x_0': x_0,
+        'edge_index': data.edge_index,
+        'B1': B1,
+        'B2': B2,
+        'frc': frc_weights,
+        'y': data.y
+    }
+
+def process_dataset(dataset, ignore_node_features=False):
     """
     Preprocess all graphs in the dataset into their topological representations.
     """
     processed_data = []
-    print("Lifting graphs to Simplicial Complexes...")
-    for i, data in enumerate(dataset):
-        # Lift graph
-        sc, _ = lift_graph_to_simplicial_complex(data)
-        
-        # Get incidence matrices
-        B1, B2 = get_incidence_matrices(sc)
-        
-        # Get node features if they exist, otherwise use degree or constant
-        if hasattr(data, 'x') and data.x is not None:
-            x_0 = data.x
-        else:
-            # Use constant feature if node features are missing
-            x_0 = torch.ones((len(sc.skeleton(0)), 1))
-            
-        # Get edge curvatures
-        if sc.dim >= 1:
-            frc_dict = sc.get_simplex_attributes('frc')
-            # TopoNetX keeps simplices in order of insertion, but we ensure we extract them properly
-            frc_list = [frc_dict[tuple(edge)] for edge in sc.skeleton(1)]
-            frc_weights = torch.tensor(frc_list, dtype=torch.float32).unsqueeze(1)
-        else:
-            frc_weights = torch.empty((0, 1))
-            
-        y = data.y
-        edge_index = data.edge_index
-        
-        processed_data.append({
-            'x_0': x_0,
-            'edge_index': edge_index,
-            'B1': B1,
-            'B2': B2,
-            'frc': frc_weights,
-            'y': y
-        })
-        
+    print("Lifting graphs to Simplicial Complexes (Using 7 Cores)...")
+    
+    args_list = [(data, ignore_node_features) for data in dataset]
+    
+    pool = multiprocessing.Pool(processes=7)
+    
+    for i, result in enumerate(pool.imap(_process_single_graph, args_list)):
+        processed_data.append(result)
         if (i+1) % 50 == 0:
             print(f"Processed {i+1}/{len(dataset)} graphs")
+            
+    pool.close()
+    pool.join()
             
     return processed_data
 

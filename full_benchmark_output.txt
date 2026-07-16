@@ -1,0 +1,842 @@
+Using device: cpu
+
+--- 1. Manifold Diversity ---
+Processing REDDIT-BINARY...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/2000 graphs
+Processed 100/2000 graphs
+Processed 150/2000 graphs
+Processed 200/2000 graphs
+Processed 250/2000 graphs
+Processed 300/2000 graphs
+Processed 350/2000 graphs
+Processed 400/2000 graphs
+Processed 450/2000 graphs
+Processed 500/2000 graphs
+Processed 550/2000 graphs
+Processed 600/2000 graphs
+Processed 650/2000 graphs
+Processed 700/2000 graphs
+Processed 750/2000 graphs
+Processed 800/2000 graphs
+Processed 850/2000 graphs
+Processed 900/2000 graphs
+Processed 950/2000 graphs
+Processed 1000/2000 graphs
+Processed 1050/2000 graphs
+Processed 1100/2000 graphs
+Processed 1150/2000 graphs
+Processed 1200/2000 graphs
+Processed 1250/2000 graphs
+Processed 1300/2000 graphs
+Processed 1350/2000 graphs
+Processed 1400/2000 graphs
+Processed 1450/2000 graphs
+Processed 1500/2000 graphs
+Processed 1550/2000 graphs
+Processed 1600/2000 graphs
+Processed 1650/2000 graphs
+Processed 1700/2000 graphs
+Processed 1750/2000 graphs
+Processed 1800/2000 graphs
+Processed 1850/2000 graphs
+Processed 1900/2000 graphs
+Processed 1950/2000 graphs
+Processed 2000/2000 graphs
+  Running GCN trials...
+  Running MPSN trials...
+  REDDIT-BINARY: GCN=0.7585, MPSN=0.7688, p=6.1603e-03
+Processing COLLAB...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/5000 graphs
+Processed 100/5000 graphs
+Processed 150/5000 graphs
+Processed 200/5000 graphs
+Processed 250/5000 graphs
+Processed 300/5000 graphs
+Processed 350/5000 graphs
+Processed 400/5000 graphs
+Processed 450/5000 graphs
+Processed 500/5000 graphs
+Processed 550/5000 graphs
+Processed 600/5000 graphs
+Processed 650/5000 graphs
+Processed 700/5000 graphs
+Processed 750/5000 graphs
+Processed 800/5000 graphs
+Processed 850/5000 graphs
+Processed 900/5000 graphs
+Processed 950/5000 graphs
+Processed 1000/5000 graphs
+Processed 1050/5000 graphs
+Processed 1100/5000 graphs
+Processed 1150/5000 graphs
+Processed 1200/5000 graphs
+Processed 1250/5000 graphs
+Processed 1300/5000 graphs
+Processed 1350/5000 graphs
+Processed 1400/5000 graphs
+Processed 1450/5000 graphs
+Processed 1500/5000 graphs
+Processed 1550/5000 graphs
+Processed 1600/5000 graphs
+Processed 1650/5000 graphs
+Processed 1700/5000 graphs
+Processed 1750/5000 graphs
+Processed 1800/5000 graphs
+Processed 1850/5000 graphs
+Processed 1900/5000 graphs
+Processed 1950/5000 graphs
+Processed 2000/5000 graphs
+Processed 2050/5000 graphs
+Processed 2100/5000 graphs
+Processed 2150/5000 graphs
+Processed 2200/5000 graphs
+Processed 2250/5000 graphs
+Processed 2300/5000 graphs
+Processed 2350/5000 graphs
+Processed 2400/5000 graphs
+Processed 2450/5000 graphs
+Processed 2500/5000 graphs
+Processed 2550/5000 graphs
+Processed 2600/5000 graphs
+Processed 2650/5000 graphs
+Processed 2700/5000 graphs
+Processed 2750/5000 graphs
+Processed 2800/5000 graphs
+Processed 2850/5000 graphs
+Processed 2900/5000 graphs
+Processed 2950/5000 graphs
+Processed 3000/5000 graphs
+Processed 3050/5000 graphs
+Processed 3100/5000 graphs
+Processed 3150/5000 graphs
+Processed 3200/5000 graphs
+Processed 3250/5000 graphs
+Processed 3300/5000 graphs
+Processed 3350/5000 graphs
+Processed 3400/5000 graphs
+Processed 3450/5000 graphs
+Processed 3500/5000 graphs
+Processed 3550/5000 graphs
+Processed 3600/5000 graphs
+Processed 3650/5000 graphs
+Processed 3700/5000 graphs
+Processed 3750/5000 graphs
+Processed 3800/5000 graphs
+Processed 3850/5000 graphs
+Processed 3900/5000 graphs
+Processed 3950/5000 graphs
+Processed 4000/5000 graphs
+Processed 4050/5000 graphs
+Processed 4100/5000 graphs
+Processed 4150/5000 graphs
+Processed 4200/5000 graphs
+Processed 4250/5000 graphs
+Processed 4300/5000 graphs
+Processed 4350/5000 graphs
+Processed 4400/5000 graphs
+Processed 4450/5000 graphs
+Processed 4500/5000 graphs
+Processed 4550/5000 graphs
+Processed 4600/5000 graphs
+Processed 4650/5000 graphs
+Processed 4700/5000 graphs
+Processed 4750/5000 graphs
+Processed 4800/5000 graphs
+Processed 4850/5000 graphs
+Processed 4900/5000 graphs
+Processed 4950/5000 graphs
+Processed 5000/5000 graphs
+  Running GCN trials...
+  Running MPSN trials...
+  COLLAB: GCN=0.5170, MPSN=0.5356, p=1.0468e-01
+
+--- 2. Adversarial Robustness ---
+Loading NCI1 for Robustness...
+ Processing Noise p=0.0...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/4110 graphs
+Processed 100/4110 graphs
+Processed 150/4110 graphs
+Processed 200/4110 graphs
+Processed 250/4110 graphs
+Processed 300/4110 graphs
+Processed 350/4110 graphs
+Processed 400/4110 graphs
+Processed 450/4110 graphs
+Processed 500/4110 graphs
+Processed 550/4110 graphs
+Processed 600/4110 graphs
+Processed 650/4110 graphs
+Processed 700/4110 graphs
+Processed 750/4110 graphs
+Processed 800/4110 graphs
+Processed 850/4110 graphs
+Processed 900/4110 graphs
+Processed 950/4110 graphs
+Processed 1000/4110 graphs
+Processed 1050/4110 graphs
+Processed 1100/4110 graphs
+Processed 1150/4110 graphs
+Processed 1200/4110 graphs
+Processed 1250/4110 graphs
+Processed 1300/4110 graphs
+Processed 1350/4110 graphs
+Processed 1400/4110 graphs
+Processed 1450/4110 graphs
+Processed 1500/4110 graphs
+Processed 1550/4110 graphs
+Processed 1600/4110 graphs
+Processed 1650/4110 graphs
+Processed 1700/4110 graphs
+Processed 1750/4110 graphs
+Processed 1800/4110 graphs
+Processed 1850/4110 graphs
+Processed 1900/4110 graphs
+Processed 1950/4110 graphs
+Processed 2000/4110 graphs
+Processed 2050/4110 graphs
+Processed 2100/4110 graphs
+Processed 2150/4110 graphs
+Processed 2200/4110 graphs
+Processed 2250/4110 graphs
+Processed 2300/4110 graphs
+Processed 2350/4110 graphs
+Processed 2400/4110 graphs
+Processed 2450/4110 graphs
+Processed 2500/4110 graphs
+Processed 2550/4110 graphs
+Processed 2600/4110 graphs
+Processed 2650/4110 graphs
+Processed 2700/4110 graphs
+Processed 2750/4110 graphs
+Processed 2800/4110 graphs
+Processed 2850/4110 graphs
+Processed 2900/4110 graphs
+Processed 2950/4110 graphs
+Processed 3000/4110 graphs
+Processed 3050/4110 graphs
+Processed 3100/4110 graphs
+Processed 3150/4110 graphs
+Processed 3200/4110 graphs
+Processed 3250/4110 graphs
+Processed 3300/4110 graphs
+Processed 3350/4110 graphs
+Processed 3400/4110 graphs
+Processed 3450/4110 graphs
+Processed 3500/4110 graphs
+Processed 3550/4110 graphs
+Processed 3600/4110 graphs
+Processed 3650/4110 graphs
+Processed 3700/4110 graphs
+Processed 3750/4110 graphs
+Processed 3800/4110 graphs
+Processed 3850/4110 graphs
+Processed 3900/4110 graphs
+Processed 3950/4110 graphs
+Processed 4000/4110 graphs
+Processed 4050/4110 graphs
+Processed 4100/4110 graphs
+  Running GCN trials...
+  Running MPSN trials...
+  p=0.0: GCN=0.6200, MPSN=0.6310, p=2.5156e-01
+ Processing Noise p=0.05...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/4110 graphs
+Processed 100/4110 graphs
+Processed 150/4110 graphs
+Processed 200/4110 graphs
+Processed 250/4110 graphs
+Processed 300/4110 graphs
+Processed 350/4110 graphs
+Processed 400/4110 graphs
+Processed 450/4110 graphs
+Processed 500/4110 graphs
+Processed 550/4110 graphs
+Processed 600/4110 graphs
+Processed 650/4110 graphs
+Processed 700/4110 graphs
+Processed 750/4110 graphs
+Processed 800/4110 graphs
+Processed 850/4110 graphs
+Processed 900/4110 graphs
+Processed 950/4110 graphs
+Processed 1000/4110 graphs
+Processed 1050/4110 graphs
+Processed 1100/4110 graphs
+Processed 1150/4110 graphs
+Processed 1200/4110 graphs
+Processed 1250/4110 graphs
+Processed 1300/4110 graphs
+Processed 1350/4110 graphs
+Processed 1400/4110 graphs
+Processed 1450/4110 graphs
+Processed 1500/4110 graphs
+Processed 1550/4110 graphs
+Processed 1600/4110 graphs
+Processed 1650/4110 graphs
+Processed 1700/4110 graphs
+Processed 1750/4110 graphs
+Processed 1800/4110 graphs
+Processed 1850/4110 graphs
+Processed 1900/4110 graphs
+Processed 1950/4110 graphs
+Processed 2000/4110 graphs
+Processed 2050/4110 graphs
+Processed 2100/4110 graphs
+Processed 2150/4110 graphs
+Processed 2200/4110 graphs
+Processed 2250/4110 graphs
+Processed 2300/4110 graphs
+Processed 2350/4110 graphs
+Processed 2400/4110 graphs
+Processed 2450/4110 graphs
+Processed 2500/4110 graphs
+Processed 2550/4110 graphs
+Processed 2600/4110 graphs
+Processed 2650/4110 graphs
+Processed 2700/4110 graphs
+Processed 2750/4110 graphs
+Processed 2800/4110 graphs
+Processed 2850/4110 graphs
+Processed 2900/4110 graphs
+Processed 2950/4110 graphs
+Processed 3000/4110 graphs
+Processed 3050/4110 graphs
+Processed 3100/4110 graphs
+Processed 3150/4110 graphs
+Processed 3200/4110 graphs
+Processed 3250/4110 graphs
+Processed 3300/4110 graphs
+Processed 3350/4110 graphs
+Processed 3400/4110 graphs
+Processed 3450/4110 graphs
+Processed 3500/4110 graphs
+Processed 3550/4110 graphs
+Processed 3600/4110 graphs
+Processed 3650/4110 graphs
+Processed 3700/4110 graphs
+Processed 3750/4110 graphs
+Processed 3800/4110 graphs
+Processed 3850/4110 graphs
+Processed 3900/4110 graphs
+Processed 3950/4110 graphs
+Processed 4000/4110 graphs
+Processed 4050/4110 graphs
+Processed 4100/4110 graphs
+  Running GCN trials...
+  Running MPSN trials...
+  p=0.05: GCN=0.6238, MPSN=0.6302, p=4.6538e-01
+ Processing Noise p=0.1...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/4110 graphs
+Processed 100/4110 graphs
+Processed 150/4110 graphs
+Processed 200/4110 graphs
+Processed 250/4110 graphs
+Processed 300/4110 graphs
+Processed 350/4110 graphs
+Processed 400/4110 graphs
+Processed 450/4110 graphs
+Processed 500/4110 graphs
+Processed 550/4110 graphs
+Processed 600/4110 graphs
+Processed 650/4110 graphs
+Processed 700/4110 graphs
+Processed 750/4110 graphs
+Processed 800/4110 graphs
+Processed 850/4110 graphs
+Processed 900/4110 graphs
+Processed 950/4110 graphs
+Processed 1000/4110 graphs
+Processed 1050/4110 graphs
+Processed 1100/4110 graphs
+Processed 1150/4110 graphs
+Processed 1200/4110 graphs
+Processed 1250/4110 graphs
+Processed 1300/4110 graphs
+Processed 1350/4110 graphs
+Processed 1400/4110 graphs
+Processed 1450/4110 graphs
+Processed 1500/4110 graphs
+Processed 1550/4110 graphs
+Processed 1600/4110 graphs
+Processed 1650/4110 graphs
+Processed 1700/4110 graphs
+Processed 1750/4110 graphs
+Processed 1800/4110 graphs
+Processed 1850/4110 graphs
+Processed 1900/4110 graphs
+Processed 1950/4110 graphs
+Processed 2000/4110 graphs
+Processed 2050/4110 graphs
+Processed 2100/4110 graphs
+Processed 2150/4110 graphs
+Processed 2200/4110 graphs
+Processed 2250/4110 graphs
+Processed 2300/4110 graphs
+Processed 2350/4110 graphs
+Processed 2400/4110 graphs
+Processed 2450/4110 graphs
+Processed 2500/4110 graphs
+Processed 2550/4110 graphs
+Processed 2600/4110 graphs
+Processed 2650/4110 graphs
+Processed 2700/4110 graphs
+Processed 2750/4110 graphs
+Processed 2800/4110 graphs
+Processed 2850/4110 graphs
+Processed 2900/4110 graphs
+Processed 2950/4110 graphs
+Processed 3000/4110 graphs
+Processed 3050/4110 graphs
+Processed 3100/4110 graphs
+Processed 3150/4110 graphs
+Processed 3200/4110 graphs
+Processed 3250/4110 graphs
+Processed 3300/4110 graphs
+Processed 3350/4110 graphs
+Processed 3400/4110 graphs
+Processed 3450/4110 graphs
+Processed 3500/4110 graphs
+Processed 3550/4110 graphs
+Processed 3600/4110 graphs
+Processed 3650/4110 graphs
+Processed 3700/4110 graphs
+Processed 3750/4110 graphs
+Processed 3800/4110 graphs
+Processed 3850/4110 graphs
+Processed 3900/4110 graphs
+Processed 3950/4110 graphs
+Processed 4000/4110 graphs
+Processed 4050/4110 graphs
+Processed 4100/4110 graphs
+  Running GCN trials...
+  Running MPSN trials...
+  p=0.1: GCN=0.6116, MPSN=0.6074, p=4.7547e-01
+ Processing Noise p=0.2...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/4110 graphs
+Processed 100/4110 graphs
+Processed 150/4110 graphs
+Processed 200/4110 graphs
+Processed 250/4110 graphs
+Processed 300/4110 graphs
+Processed 350/4110 graphs
+Processed 400/4110 graphs
+Processed 450/4110 graphs
+Processed 500/4110 graphs
+Processed 550/4110 graphs
+Processed 600/4110 graphs
+Processed 650/4110 graphs
+Processed 700/4110 graphs
+Processed 750/4110 graphs
+Processed 800/4110 graphs
+Processed 850/4110 graphs
+Processed 900/4110 graphs
+Processed 950/4110 graphs
+Processed 1000/4110 graphs
+Processed 1050/4110 graphs
+Processed 1100/4110 graphs
+Processed 1150/4110 graphs
+Processed 1200/4110 graphs
+Processed 1250/4110 graphs
+Processed 1300/4110 graphs
+Processed 1350/4110 graphs
+Processed 1400/4110 graphs
+Processed 1450/4110 graphs
+Processed 1500/4110 graphs
+Processed 1550/4110 graphs
+Processed 1600/4110 graphs
+Processed 1650/4110 graphs
+Processed 1700/4110 graphs
+Processed 1750/4110 graphs
+Processed 1800/4110 graphs
+Processed 1850/4110 graphs
+Processed 1900/4110 graphs
+Processed 1950/4110 graphs
+Processed 2000/4110 graphs
+Processed 2050/4110 graphs
+Processed 2100/4110 graphs
+Processed 2150/4110 graphs
+Processed 2200/4110 graphs
+Processed 2250/4110 graphs
+Processed 2300/4110 graphs
+Processed 2350/4110 graphs
+Processed 2400/4110 graphs
+Processed 2450/4110 graphs
+Processed 2500/4110 graphs
+Processed 2550/4110 graphs
+Processed 2600/4110 graphs
+Processed 2650/4110 graphs
+Processed 2700/4110 graphs
+Processed 2750/4110 graphs
+Processed 2800/4110 graphs
+Processed 2850/4110 graphs
+Processed 2900/4110 graphs
+Processed 2950/4110 graphs
+Processed 3000/4110 graphs
+Processed 3050/4110 graphs
+Processed 3100/4110 graphs
+Processed 3150/4110 graphs
+Processed 3200/4110 graphs
+Processed 3250/4110 graphs
+Processed 3300/4110 graphs
+Processed 3350/4110 graphs
+Processed 3400/4110 graphs
+Processed 3450/4110 graphs
+Processed 3500/4110 graphs
+Processed 3550/4110 graphs
+Processed 3600/4110 graphs
+Processed 3650/4110 graphs
+Processed 3700/4110 graphs
+Processed 3750/4110 graphs
+Processed 3800/4110 graphs
+Processed 3850/4110 graphs
+Processed 3900/4110 graphs
+Processed 3950/4110 graphs
+Processed 4000/4110 graphs
+Processed 4050/4110 graphs
+Processed 4100/4110 graphs
+  Running GCN trials...
+  Running MPSN trials...
+  p=0.2: GCN=0.6109, MPSN=0.6072, p=6.2887e-01
+
+  [Targeted Bottleneck Attack]
+ Processing Targeted Drop p=0.05...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/4110 graphs
+Processed 100/4110 graphs
+Processed 150/4110 graphs
+Processed 200/4110 graphs
+Processed 250/4110 graphs
+Processed 300/4110 graphs
+Processed 350/4110 graphs
+Processed 400/4110 graphs
+Processed 450/4110 graphs
+Processed 500/4110 graphs
+Processed 550/4110 graphs
+Processed 600/4110 graphs
+Processed 650/4110 graphs
+Processed 700/4110 graphs
+Processed 750/4110 graphs
+Processed 800/4110 graphs
+Processed 850/4110 graphs
+Processed 900/4110 graphs
+Processed 950/4110 graphs
+Processed 1000/4110 graphs
+Processed 1050/4110 graphs
+Processed 1100/4110 graphs
+Processed 1150/4110 graphs
+Processed 1200/4110 graphs
+Processed 1250/4110 graphs
+Processed 1300/4110 graphs
+Processed 1350/4110 graphs
+Processed 1400/4110 graphs
+Processed 1450/4110 graphs
+Processed 1500/4110 graphs
+Processed 1550/4110 graphs
+Processed 1600/4110 graphs
+Processed 1650/4110 graphs
+Processed 1700/4110 graphs
+Processed 1750/4110 graphs
+Processed 1800/4110 graphs
+Processed 1850/4110 graphs
+Processed 1900/4110 graphs
+Processed 1950/4110 graphs
+Processed 2000/4110 graphs
+Processed 2050/4110 graphs
+Processed 2100/4110 graphs
+Processed 2150/4110 graphs
+Processed 2200/4110 graphs
+Processed 2250/4110 graphs
+Processed 2300/4110 graphs
+Processed 2350/4110 graphs
+Processed 2400/4110 graphs
+Processed 2450/4110 graphs
+Processed 2500/4110 graphs
+Processed 2550/4110 graphs
+Processed 2600/4110 graphs
+Processed 2650/4110 graphs
+Processed 2700/4110 graphs
+Processed 2750/4110 graphs
+Processed 2800/4110 graphs
+Processed 2850/4110 graphs
+Processed 2900/4110 graphs
+Processed 2950/4110 graphs
+Processed 3000/4110 graphs
+Processed 3050/4110 graphs
+Processed 3100/4110 graphs
+Processed 3150/4110 graphs
+Processed 3200/4110 graphs
+Processed 3250/4110 graphs
+Processed 3300/4110 graphs
+Processed 3350/4110 graphs
+Processed 3400/4110 graphs
+Processed 3450/4110 graphs
+Processed 3500/4110 graphs
+Processed 3550/4110 graphs
+Processed 3600/4110 graphs
+Processed 3650/4110 graphs
+Processed 3700/4110 graphs
+Processed 3750/4110 graphs
+Processed 3800/4110 graphs
+Processed 3850/4110 graphs
+Processed 3900/4110 graphs
+Processed 3950/4110 graphs
+Processed 4000/4110 graphs
+Processed 4050/4110 graphs
+Processed 4100/4110 graphs
+  Running GCN trials...
+  Running MPSN trials...
+  Targeted p=0.05: GCN=0.6292, MPSN=0.6024, p=3.7462e-02
+ Processing Targeted Drop p=0.1...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/4110 graphs
+Processed 100/4110 graphs
+Processed 150/4110 graphs
+Processed 200/4110 graphs
+Processed 250/4110 graphs
+Processed 300/4110 graphs
+Processed 350/4110 graphs
+Processed 400/4110 graphs
+Processed 450/4110 graphs
+Processed 500/4110 graphs
+Processed 550/4110 graphs
+Processed 600/4110 graphs
+Processed 650/4110 graphs
+Processed 700/4110 graphs
+Processed 750/4110 graphs
+Processed 800/4110 graphs
+Processed 850/4110 graphs
+Processed 900/4110 graphs
+Processed 950/4110 graphs
+Processed 1000/4110 graphs
+Processed 1050/4110 graphs
+Processed 1100/4110 graphs
+Processed 1150/4110 graphs
+Processed 1200/4110 graphs
+Processed 1250/4110 graphs
+Processed 1300/4110 graphs
+Processed 1350/4110 graphs
+Processed 1400/4110 graphs
+Processed 1450/4110 graphs
+Processed 1500/4110 graphs
+Processed 1550/4110 graphs
+Processed 1600/4110 graphs
+Processed 1650/4110 graphs
+Processed 1700/4110 graphs
+Processed 1750/4110 graphs
+Processed 1800/4110 graphs
+Processed 1850/4110 graphs
+Processed 1900/4110 graphs
+Processed 1950/4110 graphs
+Processed 2000/4110 graphs
+Processed 2050/4110 graphs
+Processed 2100/4110 graphs
+Processed 2150/4110 graphs
+Processed 2200/4110 graphs
+Processed 2250/4110 graphs
+Processed 2300/4110 graphs
+Processed 2350/4110 graphs
+Processed 2400/4110 graphs
+Processed 2450/4110 graphs
+Processed 2500/4110 graphs
+Processed 2550/4110 graphs
+Processed 2600/4110 graphs
+Processed 2650/4110 graphs
+Processed 2700/4110 graphs
+Processed 2750/4110 graphs
+Processed 2800/4110 graphs
+Processed 2850/4110 graphs
+Processed 2900/4110 graphs
+Processed 2950/4110 graphs
+Processed 3000/4110 graphs
+Processed 3050/4110 graphs
+Processed 3100/4110 graphs
+Processed 3150/4110 graphs
+Processed 3200/4110 graphs
+Processed 3250/4110 graphs
+Processed 3300/4110 graphs
+Processed 3350/4110 graphs
+Processed 3400/4110 graphs
+Processed 3450/4110 graphs
+Processed 3500/4110 graphs
+Processed 3550/4110 graphs
+Processed 3600/4110 graphs
+Processed 3650/4110 graphs
+Processed 3700/4110 graphs
+Processed 3750/4110 graphs
+Processed 3800/4110 graphs
+Processed 3850/4110 graphs
+Processed 3900/4110 graphs
+Processed 3950/4110 graphs
+Processed 4000/4110 graphs
+Processed 4050/4110 graphs
+Processed 4100/4110 graphs
+  Running GCN trials...
+  Running MPSN trials...
+  Targeted p=0.1: GCN=0.6335, MPSN=0.6114, p=3.4040e-02
+
+--- 3. Ablation Study ---
+Loading MUTAG for Ablation...
+Downloading https://www.chrsmrrs.com/graphkerneldatasets/MUTAG.zip
+Processing...
+Done!
+ Processing Dim=2, Gating=none...
+  Acc=0.7895 ± 0.0288
+ Processing Dim=2, Gating=scalar...
+  Acc=0.8447 ± 0.0219
+ Processing Dim=2, Gating=vector...
+  Acc=0.8500 ± 0.0121
+ Processing Dim=2, Gating=curvature...
+  Acc=0.8395 ± 0.0184
+ Processing Dim=3, Gating=none...
+  Acc=0.7895 ± 0.0288
+ Processing Dim=3, Gating=scalar...
+  Acc=0.8447 ± 0.0219
+ Processing Dim=3, Gating=vector...
+  Acc=0.8500 ± 0.0121
+ Processing Dim=3, Gating=curvature...
+  Acc=0.8395 ± 0.0184
+
+--- 4. Scalability Profile ---
+Downloading http://snap.stanford.edu/ogb/data/nodeproppred/arxiv.zip
+  0%|          | 0/81 [00:00<?, ?it/s]Downloaded 0.00 GB:   0%|          | 0/81 [00:00<?, ?it/s]Downloaded 0.00 GB:   1%|          | 1/81 [00:00<01:09,  1.15it/s]Downloaded 0.00 GB:   1%|          | 1/81 [00:01<01:09,  1.15it/s]Downloaded 0.00 GB:   2%|▏         | 2/81 [00:01<01:04,  1.22it/s]Downloaded 0.00 GB:   2%|▏         | 2/81 [00:02<01:04,  1.22it/s]Downloaded 0.00 GB:   4%|▎         | 3/81 [00:02<00:57,  1.37it/s]Downloaded 0.00 GB:   4%|▎         | 3/81 [00:02<00:57,  1.37it/s]Downloaded 0.00 GB:   5%|▍         | 4/81 [00:02<00:47,  1.63it/s]Downloaded 0.00 GB:   5%|▍         | 4/81 [00:02<00:47,  1.63it/s]Downloaded 0.00 GB:   6%|▌         | 5/81 [00:02<00:35,  2.12it/s]Downloaded 0.01 GB:   6%|▌         | 5/81 [00:03<00:35,  2.12it/s]Downloaded 0.01 GB:   7%|▋         | 6/81 [00:03<00:27,  2.76it/s]Downloaded 0.01 GB:   7%|▋         | 6/81 [00:03<00:27,  2.76it/s]Downloaded 0.01 GB:   9%|▊         | 7/81 [00:03<00:21,  3.46it/s]Downloaded 0.01 GB:   9%|▊         | 7/81 [00:03<00:21,  3.46it/s]Downloaded 0.01 GB:  10%|▉         | 8/81 [00:03<00:17,  4.18it/s]Downloaded 0.01 GB:  10%|▉         | 8/81 [00:03<00:17,  4.18it/s]Downloaded 0.01 GB:  11%|█         | 9/81 [00:03<00:14,  4.85it/s]Downloaded 0.01 GB:  11%|█         | 9/81 [00:03<00:14,  4.85it/s]Downloaded 0.01 GB:  12%|█▏        | 10/81 [00:03<00:12,  5.63it/s]Downloaded 0.01 GB:  12%|█▏        | 10/81 [00:03<00:12,  5.63it/s]Downloaded 0.01 GB:  14%|█▎        | 11/81 [00:03<00:11,  6.22it/s]Downloaded 0.01 GB:  14%|█▎        | 11/81 [00:03<00:11,  6.22it/s]Downloaded 0.01 GB:  15%|█▍        | 12/81 [00:03<00:10,  6.68it/s]Downloaded 0.01 GB:  15%|█▍        | 12/81 [00:03<00:10,  6.68it/s]Downloaded 0.01 GB:  16%|█▌        | 13/81 [00:03<00:09,  6.94it/s]Downloaded 0.01 GB:  16%|█▌        | 13/81 [00:04<00:09,  6.94it/s]Downloaded 0.01 GB:  17%|█▋        | 14/81 [00:04<00:09,  7.10it/s]Downloaded 0.01 GB:  17%|█▋        | 14/81 [00:04<00:09,  7.10it/s]Downloaded 0.01 GB:  19%|█▊        | 15/81 [00:04<00:09,  7.26it/s]Downloaded 0.02 GB:  19%|█▊        | 15/81 [00:04<00:09,  7.26it/s]Downloaded 0.02 GB:  20%|█▉        | 16/81 [00:04<00:08,  7.63it/s]Downloaded 0.02 GB:  20%|█▉        | 16/81 [00:04<00:08,  7.63it/s]Downloaded 0.02 GB:  21%|██        | 17/81 [00:04<00:08,  7.54it/s]Downloaded 0.02 GB:  21%|██        | 17/81 [00:04<00:08,  7.54it/s]Downloaded 0.02 GB:  22%|██▏       | 18/81 [00:04<00:07,  7.92it/s]Downloaded 0.02 GB:  22%|██▏       | 18/81 [00:04<00:07,  7.92it/s]Downloaded 0.02 GB:  23%|██▎       | 19/81 [00:04<00:07,  7.94it/s]Downloaded 0.02 GB:  23%|██▎       | 19/81 [00:04<00:07,  7.94it/s]Downloaded 0.02 GB:  25%|██▍       | 20/81 [00:04<00:07,  7.85it/s]Downloaded 0.02 GB:  25%|██▍       | 20/81 [00:04<00:07,  7.85it/s]Downloaded 0.02 GB:  26%|██▌       | 21/81 [00:04<00:07,  7.97it/s]Downloaded 0.02 GB:  26%|██▌       | 21/81 [00:05<00:07,  7.97it/s]Downloaded 0.02 GB:  27%|██▋       | 22/81 [00:05<00:07,  8.09it/s]Downloaded 0.02 GB:  27%|██▋       | 22/81 [00:05<00:07,  8.09it/s]Downloaded 0.02 GB:  28%|██▊       | 23/81 [00:05<00:07,  7.96it/s]Downloaded 0.02 GB:  28%|██▊       | 23/81 [00:05<00:07,  7.96it/s]Downloaded 0.02 GB:  30%|██▉       | 24/81 [00:05<00:07,  8.07it/s]Downloaded 0.02 GB:  30%|██▉       | 24/81 [00:05<00:07,  8.07it/s]Downloaded 0.02 GB:  31%|███       | 25/81 [00:05<00:07,  7.87it/s]Downloaded 0.03 GB:  31%|███       | 25/81 [00:05<00:07,  7.87it/s]Downloaded 0.03 GB:  32%|███▏      | 26/81 [00:05<00:06,  8.13it/s]Downloaded 0.03 GB:  32%|███▏      | 26/81 [00:05<00:06,  8.13it/s]Downloaded 0.03 GB:  33%|███▎      | 27/81 [00:05<00:06,  8.12it/s]Downloaded 0.03 GB:  33%|███▎      | 27/81 [00:05<00:06,  8.12it/s]Downloaded 0.03 GB:  35%|███▍      | 28/81 [00:05<00:06,  8.04it/s]Downloaded 0.03 GB:  35%|███▍      | 28/81 [00:05<00:06,  8.04it/s]Downloaded 0.03 GB:  36%|███▌      | 29/81 [00:05<00:06,  7.66it/s]Downloaded 0.03 GB:  36%|███▌      | 29/81 [00:06<00:06,  7.66it/s]Downloaded 0.03 GB:  37%|███▋      | 30/81 [00:06<00:06,  8.17it/s]Downloaded 0.03 GB:  37%|███▋      | 30/81 [00:06<00:06,  8.17it/s]Downloaded 0.03 GB:  38%|███▊      | 31/81 [00:06<00:06,  8.11it/s]Downloaded 0.03 GB:  38%|███▊      | 31/81 [00:06<00:06,  8.11it/s]Downloaded 0.03 GB:  40%|███▉      | 32/81 [00:06<00:06,  8.12it/s]Downloaded 0.03 GB:  40%|███▉      | 32/81 [00:06<00:06,  8.12it/s]Downloaded 0.03 GB:  41%|████      | 33/81 [00:06<00:06,  7.90it/s]Downloaded 0.03 GB:  41%|████      | 33/81 [00:06<00:06,  7.90it/s]Downloaded 0.03 GB:  42%|████▏     | 34/81 [00:06<00:05,  8.15it/s]Downloaded 0.03 GB:  42%|████▏     | 34/81 [00:06<00:05,  8.15it/s]Downloaded 0.03 GB:  43%|████▎     | 35/81 [00:06<00:05,  8.15it/s]Downloaded 0.04 GB:  43%|████▎     | 35/81 [00:06<00:05,  8.15it/s]Downloaded 0.04 GB:  44%|████▍     | 36/81 [00:06<00:05,  8.09it/s]Downloaded 0.04 GB:  44%|████▍     | 36/81 [00:06<00:05,  8.09it/s]Downloaded 0.04 GB:  46%|████▌     | 37/81 [00:06<00:05,  8.06it/s]Downloaded 0.04 GB:  46%|████▌     | 37/81 [00:07<00:05,  8.06it/s]Downloaded 0.04 GB:  47%|████▋     | 38/81 [00:07<00:05,  8.08it/s]Downloaded 0.04 GB:  47%|████▋     | 38/81 [00:07<00:05,  8.08it/s]Downloaded 0.04 GB:  48%|████▊     | 39/81 [00:07<00:05,  8.10it/s]Downloaded 0.04 GB:  48%|████▊     | 39/81 [00:07<00:05,  8.10it/s]Downloaded 0.04 GB:  49%|████▉     | 40/81 [00:07<00:05,  8.04it/s]Downloaded 0.04 GB:  49%|████▉     | 40/81 [00:07<00:05,  8.04it/s]Downloaded 0.04 GB:  51%|█████     | 41/81 [00:07<00:05,  7.81it/s]Downloaded 0.04 GB:  51%|█████     | 41/81 [00:07<00:05,  7.81it/s]Downloaded 0.04 GB:  52%|█████▏    | 42/81 [00:07<00:04,  8.06it/s]Downloaded 0.04 GB:  52%|█████▏    | 42/81 [00:07<00:04,  8.06it/s]Downloaded 0.04 GB:  53%|█████▎    | 43/81 [00:07<00:04,  8.13it/s]Downloaded 0.04 GB:  53%|█████▎    | 43/81 [00:07<00:04,  8.13it/s]Downloaded 0.04 GB:  54%|█████▍    | 44/81 [00:07<00:04,  7.59it/s]Downloaded 0.04 GB:  54%|█████▍    | 44/81 [00:07<00:04,  7.59it/s]Downloaded 0.04 GB:  56%|█████▌    | 45/81 [00:07<00:04,  8.09it/s]Downloaded 0.04 GB:  56%|█████▌    | 45/81 [00:08<00:04,  8.09it/s]Downloaded 0.04 GB:  57%|█████▋    | 46/81 [00:08<00:04,  8.14it/s]Downloaded 0.05 GB:  57%|█████▋    | 46/81 [00:08<00:04,  8.14it/s]Downloaded 0.05 GB:  58%|█████▊    | 47/81 [00:08<00:05,  6.67it/s]Downloaded 0.05 GB:  58%|█████▊    | 47/81 [00:08<00:05,  6.67it/s]Downloaded 0.05 GB:  59%|█████▉    | 48/81 [00:08<00:04,  6.73it/s]Downloaded 0.05 GB:  59%|█████▉    | 48/81 [00:08<00:04,  6.73it/s]Downloaded 0.05 GB:  60%|██████    | 49/81 [00:08<00:04,  6.86it/s]Downloaded 0.05 GB:  60%|██████    | 49/81 [00:08<00:04,  6.86it/s]Downloaded 0.05 GB:  62%|██████▏   | 50/81 [00:08<00:04,  7.42it/s]Downloaded 0.05 GB:  62%|██████▏   | 50/81 [00:08<00:04,  7.42it/s]Downloaded 0.05 GB:  63%|██████▎   | 51/81 [00:08<00:03,  7.56it/s]Downloaded 0.05 GB:  63%|██████▎   | 51/81 [00:08<00:03,  7.56it/s]Downloaded 0.05 GB:  64%|██████▍   | 52/81 [00:08<00:03,  7.37it/s]Downloaded 0.05 GB:  64%|██████▍   | 52/81 [00:09<00:03,  7.37it/s]Downloaded 0.05 GB:  65%|██████▌   | 53/81 [00:09<00:03,  7.85it/s]Downloaded 0.05 GB:  65%|██████▌   | 53/81 [00:09<00:03,  7.85it/s]Downloaded 0.05 GB:  67%|██████▋   | 54/81 [00:09<00:03,  7.93it/s]Downloaded 0.05 GB:  67%|██████▋   | 54/81 [00:09<00:03,  7.93it/s]Downloaded 0.05 GB:  68%|██████▊   | 55/81 [00:09<00:03,  7.92it/s]Downloaded 0.05 GB:  68%|██████▊   | 55/81 [00:09<00:03,  7.92it/s]Downloaded 0.05 GB:  69%|██████▉   | 56/81 [00:09<00:03,  7.79it/s]Downloaded 0.06 GB:  69%|██████▉   | 56/81 [00:09<00:03,  7.79it/s]Downloaded 0.06 GB:  70%|███████   | 57/81 [00:09<00:03,  7.79it/s]Downloaded 0.06 GB:  70%|███████   | 57/81 [00:09<00:03,  7.79it/s]Downloaded 0.06 GB:  72%|███████▏  | 58/81 [00:09<00:02,  8.10it/s]Downloaded 0.06 GB:  72%|███████▏  | 58/81 [00:09<00:02,  8.10it/s]Downloaded 0.06 GB:  73%|███████▎  | 59/81 [00:09<00:02,  8.07it/s]Downloaded 0.06 GB:  73%|███████▎  | 59/81 [00:09<00:02,  8.07it/s]Downloaded 0.06 GB:  74%|███████▍  | 60/81 [00:09<00:02,  7.97it/s]Downloaded 0.06 GB:  74%|███████▍  | 60/81 [00:10<00:02,  7.97it/s]Downloaded 0.06 GB:  75%|███████▌  | 61/81 [00:10<00:03,  5.42it/s]Downloaded 0.06 GB:  75%|███████▌  | 61/81 [00:10<00:03,  5.42it/s]Downloaded 0.06 GB:  77%|███████▋  | 62/81 [00:10<00:03,  6.00it/s]Downloaded 0.06 GB:  77%|███████▋  | 62/81 [00:10<00:03,  6.00it/s]Downloaded 0.06 GB:  78%|███████▊  | 63/81 [00:10<00:02,  6.51it/s]Downloaded 0.06 GB:  78%|███████▊  | 63/81 [00:10<00:02,  6.51it/s]Downloaded 0.06 GB:  79%|███████▉  | 64/81 [00:10<00:02,  6.89it/s]Downloaded 0.06 GB:  79%|███████▉  | 64/81 [00:10<00:02,  6.89it/s]Downloaded 0.06 GB:  80%|████████  | 65/81 [00:10<00:02,  7.03it/s]Downloaded 0.06 GB:  80%|████████  | 65/81 [00:10<00:02,  7.03it/s]Downloaded 0.06 GB:  81%|████████▏ | 66/81 [00:10<00:01,  7.53it/s]Downloaded 0.07 GB:  81%|████████▏ | 66/81 [00:11<00:01,  7.53it/s]Downloaded 0.07 GB:  83%|████████▎ | 67/81 [00:11<00:01,  7.66it/s]Downloaded 0.07 GB:  83%|████████▎ | 67/81 [00:11<00:01,  7.66it/s]Downloaded 0.07 GB:  84%|████████▍ | 68/81 [00:11<00:01,  7.77it/s]Downloaded 0.07 GB:  84%|████████▍ | 68/81 [00:11<00:01,  7.77it/s]Downloaded 0.07 GB:  85%|████████▌ | 69/81 [00:11<00:01,  7.85it/s]Downloaded 0.07 GB:  85%|████████▌ | 69/81 [00:11<00:01,  7.85it/s]Downloaded 0.07 GB:  86%|████████▋ | 70/81 [00:11<00:01,  7.90it/s]Downloaded 0.07 GB:  86%|████████▋ | 70/81 [00:11<00:01,  7.90it/s]Downloaded 0.07 GB:  88%|████████▊ | 71/81 [00:11<00:01,  7.99it/s]Downloaded 0.07 GB:  88%|████████▊ | 71/81 [00:11<00:01,  7.99it/s]Downloaded 0.07 GB:  89%|████████▉ | 72/81 [00:11<00:01,  8.01it/s]Downloaded 0.07 GB:  89%|████████▉ | 72/81 [00:11<00:01,  8.01it/s]Downloaded 0.07 GB:  90%|█████████ | 73/81 [00:11<00:01,  7.75it/s]Downloaded 0.07 GB:  90%|█████████ | 73/81 [00:11<00:01,  7.75it/s]Downloaded 0.07 GB:  91%|█████████▏| 74/81 [00:11<00:00,  8.03it/s]Downloaded 0.07 GB:  91%|█████████▏| 74/81 [00:12<00:00,  8.03it/s]Downloaded 0.07 GB:  93%|█████████▎| 75/81 [00:12<00:00,  8.07it/s]Downloaded 0.07 GB:  93%|█████████▎| 75/81 [00:12<00:00,  8.07it/s]Downloaded 0.07 GB:  94%|█████████▍| 76/81 [00:12<00:00,  8.09it/s]Downloaded 0.08 GB:  94%|█████████▍| 76/81 [00:12<00:00,  8.09it/s]Downloaded 0.08 GB:  95%|█████████▌| 77/81 [00:12<00:00,  8.06it/s]Downloaded 0.08 GB:  95%|█████████▌| 77/81 [00:12<00:00,  8.06it/s]Downloaded 0.08 GB:  96%|█████████▋| 78/81 [00:12<00:00,  8.12it/s]Downloaded 0.08 GB:  96%|█████████▋| 78/81 [00:12<00:00,  8.12it/s]Downloaded 0.08 GB:  98%|█████████▊| 79/81 [00:12<00:00,  7.89it/s]Downloaded 0.08 GB:  98%|█████████▊| 79/81 [00:12<00:00,  7.89it/s]Downloaded 0.08 GB:  98%|█████████▊| 79/81 [00:12<00:00,  7.89it/s]Downloaded 0.08 GB: 100%|██████████| 81/81 [00:12<00:00,  6.46it/s]
+Extracting /tmp/ogb/arxiv.zip
+Processing...
+Loading necessary files...
+This might take a while.
+Processing graphs...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 53092.46it/s]
+Converting graphs into PyG objects...
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 5133.79it/s]
+Saving...
+Done!
+Scalability failed: Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL torch_geometric.data.data.DataEdgeAttr was not an allowed global by default. Please use `torch.serialization.add_safe_globals([torch_geometric.data.data.DataEdgeAttr])` or the `torch.serialization.safe_globals([torch_geometric.data.data.DataEdgeAttr])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.
+
+--- 5. Transferability Benchmark (Zero-Shot) ---
+Loading PROTEINS and NCI1 datasets...
+Downloading https://www.chrsmrrs.com/graphkerneldatasets/PROTEINS.zip
+Processing...
+Done!
+Processing PROTEINS (Source)...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/1113 graphs
+Processed 100/1113 graphs
+Processed 150/1113 graphs
+Processed 200/1113 graphs
+Processed 250/1113 graphs
+Processed 300/1113 graphs
+Processed 350/1113 graphs
+Processed 400/1113 graphs
+Processed 450/1113 graphs
+Processed 500/1113 graphs
+Processed 550/1113 graphs
+Processed 600/1113 graphs
+Processed 650/1113 graphs
+Processed 700/1113 graphs
+Processed 750/1113 graphs
+Processed 800/1113 graphs
+Processed 850/1113 graphs
+Processed 900/1113 graphs
+Processed 950/1113 graphs
+Processed 1000/1113 graphs
+Processed 1050/1113 graphs
+Processed 1100/1113 graphs
+Processing NCI1 (Target)...
+Lifting graphs to Simplicial Complexes (Using 7 Cores)...
+Processed 50/4110 graphs
+Processed 100/4110 graphs
+Processed 150/4110 graphs
+Processed 200/4110 graphs
+Processed 250/4110 graphs
+Processed 300/4110 graphs
+Processed 350/4110 graphs
+Processed 400/4110 graphs
+Processed 450/4110 graphs
+Processed 500/4110 graphs
+Processed 550/4110 graphs
+Processed 600/4110 graphs
+Processed 650/4110 graphs
+Processed 700/4110 graphs
+Processed 750/4110 graphs
+Processed 800/4110 graphs
+Processed 850/4110 graphs
+Processed 900/4110 graphs
+Processed 950/4110 graphs
+Processed 1000/4110 graphs
+Processed 1050/4110 graphs
+Processed 1100/4110 graphs
+Processed 1150/4110 graphs
+Processed 1200/4110 graphs
+Processed 1250/4110 graphs
+Processed 1300/4110 graphs
+Processed 1350/4110 graphs
+Processed 1400/4110 graphs
+Processed 1450/4110 graphs
+Processed 1500/4110 graphs
+Processed 1550/4110 graphs
+Processed 1600/4110 graphs
+Processed 1650/4110 graphs
+Processed 1700/4110 graphs
+Processed 1750/4110 graphs
+Processed 1800/4110 graphs
+Processed 1850/4110 graphs
+Processed 1900/4110 graphs
+Processed 1950/4110 graphs
+Processed 2000/4110 graphs
+Processed 2050/4110 graphs
+Processed 2100/4110 graphs
+Processed 2150/4110 graphs
+Processed 2200/4110 graphs
+Processed 2250/4110 graphs
+Processed 2300/4110 graphs
+Processed 2350/4110 graphs
+Processed 2400/4110 graphs
+Processed 2450/4110 graphs
+Processed 2500/4110 graphs
+Processed 2550/4110 graphs
+Processed 2600/4110 graphs
+Processed 2650/4110 graphs
+Processed 2700/4110 graphs
+Processed 2750/4110 graphs
+Processed 2800/4110 graphs
+Processed 2850/4110 graphs
+Processed 2900/4110 graphs
+Processed 2950/4110 graphs
+Processed 3000/4110 graphs
+Processed 3050/4110 graphs
+Processed 3100/4110 graphs
+Processed 3150/4110 graphs
+Processed 3200/4110 graphs
+Processed 3250/4110 graphs
+Processed 3300/4110 graphs
+Processed 3350/4110 graphs
+Processed 3400/4110 graphs
+Processed 3450/4110 graphs
+Processed 3500/4110 graphs
+Processed 3550/4110 graphs
+Processed 3600/4110 graphs
+Processed 3650/4110 graphs
+Processed 3700/4110 graphs
+Processed 3750/4110 graphs
+Processed 3800/4110 graphs
+Processed 3850/4110 graphs
+Processed 3900/4110 graphs
+Processed 3950/4110 graphs
+Processed 4000/4110 graphs
+Processed 4050/4110 graphs
+Processed 4100/4110 graphs
+  Evaluating Zero-Shot Transfer...
+  Running GCN trials...
+  Running MPSN trials...
+  Zero-Shot Transfer: GCN=0.4995, MPSN=0.5115, p=1.5717e-02
+
+Saved full metrics to results_full_run.json
